@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite">
+
+    <test name="Negative Scenarios">
+        <classes>
+            <class name="webTestScripts.t_NS_Login">
+                <methods>
+                    <include name="invalidLogin"/>
+                </methods>
+            </class>
+            <class name="webTestScripts.t_NS_UserManagement">
+                <methods>
+                    <include name="invalidUserManagement"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Positive Scenarios">
+        <classes>
+            <class name="webTestScripts.t_PositiveScenarios">
+                <methods>
+                    <include name="validScenarios"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
