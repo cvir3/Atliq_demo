@@ -44,8 +44,8 @@ public class sd_LandingPage {
     @Given("admin add the user")
     public void admin_add_the_user()
     {
-        WebElement clickable = driver.findElement(By.xpath("//a[@class='oxd-main-menu-item active']"));
-        new Actions(driver).clickAndHold(clickable).perform();
+        WebElement clickable = driver.findElement(By.xpath("//aside[@class='oxd-sidepanel']//li[1]"));
+        new Actions(driver).click(clickable).perform();
     }
     @When("click on the add button")
     public void click_on_the_add_button()
