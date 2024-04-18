@@ -26,41 +26,36 @@ import java.util.Date;
 public class baseClass {
     public static WebDriver webDriver;
     /*---This is cross browser code---*/
-    /*
-    FirefoxOptions firefoxOptions = new FirefoxOptions();
-    ChromeOptions chromeOptions = new ChromeOptions();
-    EdgeOptions edgeOptions = new EdgeOptions();
-
-    public void initialize(String browser) {
-        if (browser.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
-            webDriver = new FirefoxDriver();
-            System.out.println("Firefox is launched");
-
-        } else if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            webDriver = new ChromeDriver();
-            System.out.println("Firefox is launched");
-        } else if (browser.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
-            webDriver = new EdgeDriver();
-            System.out.println("Firefox is launched");
-        }
-    }
-     */
 
     @BeforeClass(alwaysRun = true)
-    public void setup() throws IOException {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--start-maximized");
-        WebDriverManager.chromedriver().setup();
-        webDriver = new ChromeDriver(chromeOptions);
+    public void setup() {
+        String browser = "chrome"; // Change this to the browser you want to test
+        initialize(browser);
         webDriver.manage().window().maximize();
         webDriver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
         System.out.println("Page title is " + webDriver.getTitle());
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
     }
 
+    public void initialize(String browser) {
+        if (browser.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            webDriver = new FirefoxDriver(firefoxOptions);
+            System.out.println("Firefox is launched");
+        } else if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("--start-maximized");
+            webDriver = new ChromeDriver(chromeOptions);
+            System.out.println("Chrome is launched");
+        } else if (browser.equalsIgnoreCase("edge")) {
+            WebDriverManager.edgedriver().setup();
+            EdgeOptions edgeOptions = new EdgeOptions();
+            webDriver = new EdgeDriver(edgeOptions);
+            System.out.println("Edge is launched");
+        }
+    }
 
     public String getCurrentPageUrl() {
         return webDriver.getCurrentUrl();
